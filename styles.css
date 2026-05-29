@@ -331,48 +331,54 @@ footer.site a:hover { color: var(--ink); text-decoration: underline; }
   color: var(--ink);
 }
 
-/* HOW IT WORKS v3 — 縦のナラティブ */
+/* HOW IT WORKS v4 — 3パネル（スクショ付き） */
 .howto-v2 {
   padding: 100px 0;
   border-top: 1px solid var(--hairline);
 }
-.story-steps {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 640px;
-}
-.story-steps li {
+.step-panels {
   display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 40px;
-  align-items: baseline;
-  padding: 32px 0;
-  border-bottom: 1px solid var(--hairline);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+  max-width: 980px;
+  margin: 0 auto;
 }
-.story-steps li:last-child {
-  border-bottom: none;
-}
-.story-steps .step-n {
-  font-size: 24px;
-  color: var(--ink3);
-  font-family: -apple-system, "Hiragino Mincho ProN", serif;
-  letter-spacing: 0.1em;
-  font-weight: 400;
+.step-panel {
   text-align: center;
 }
-.story-steps h4 {
-  font-size: 19px;
-  font-weight: 700;
+.step-phone {
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+}
+.phone-small {
+  max-width: 180px !important;
+  padding: 6px !important;
+  border-radius: 30px !important;
+}
+.phone-small img {
+  border-radius: 25px !important;
+}
+.step-panel .step-n {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink3);
   margin: 0 0 8px;
+  letter-spacing: 0.22em;
+}
+.step-panel h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 14px;
   color: var(--ink);
   letter-spacing: -0.01em;
 }
-.story-steps p {
+.step-panel p {
   font-size: 14.5px;
   color: var(--ink2);
   line-height: 1.85;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 240px;
 }
 
 /* PLANS v3 — 2列の縦組み、間にハイライン */
@@ -398,20 +404,28 @@ footer.site a:hover { color: var(--ink); text-decoration: underline; }
   background: var(--hairline);
 }
 .plan-col {
-  padding: 0 20px;
+  padding: 0 24px;
 }
 .plan-name {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--ink);
-  margin: 0 0 6px;
-  letter-spacing: 0.02em;
+  margin: 0 0 8px;
+  letter-spacing: -0.005em;
+}
+.plan-col-pro .plan-name::after {
+  content: " ◆";
+  color: var(--ink3);
+  font-size: 13px;
+  vertical-align: 4px;
+  margin-left: 2px;
 }
 .plan-lead {
   font-size: 13.5px;
   color: var(--ink3);
-  margin: 0 0 26px;
+  margin: 0 0 28px;
   letter-spacing: 0.02em;
+  font-style: italic;
 }
 .plan-col ul {
   list-style: none;
@@ -419,11 +433,21 @@ footer.site a:hover { color: var(--ink); text-decoration: underline; }
   margin: 0;
 }
 .plan-col li {
-  padding: 11px 0;
-  font-size: 14.5px;
-  color: var(--ink2);
-  line-height: 1.55;
-  border-bottom: 1px solid var(--divider);
+  padding: 13px 0 13px 22px;
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.6;
+  border-bottom: 1px solid var(--hairline);
+  position: relative;
+}
+.plan-col li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 13px;
+  color: var(--ink3);
+  font-weight: 500;
+  font-size: 13.5px;
 }
 .plan-col li:last-child {
   border-bottom: none;
@@ -460,13 +484,55 @@ footer.site a:hover { color: var(--ink); text-decoration: underline; }
   margin: 0;
 }
 
-/* レスポンシブ v3 */
+/* CREATOR セクション */
+.creator {
+  padding: 110px 0 100px;
+  border-top: 1px solid var(--hairline);
+  text-align: center;
+}
+.creator-body {
+  font-size: 15px;
+  color: var(--ink2);
+  margin: 0 0 38px;
+  line-height: 1.85;
+}
+.creator-x {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.005em;
+  padding: 16px 32px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  transition: background-color 0.22s ease, color 0.22s ease;
+}
+.creator-x:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+.creator-x .arrow {
+  color: var(--ink3);
+  font-weight: 400;
+  margin-left: 4px;
+  transition: color 0.22s ease;
+}
+.creator-x:hover .arrow {
+  color: var(--bg);
+}
+
+/* レスポンシブ v3/v4 */
 @media (max-width: 880px) {
   .section-title-quiet { font-size: 24px; margin-bottom: 56px; }
-  .howto-v2, .plans-v2, .faq-v2 { padding: 70px 0; }
+  .howto-v2, .plans-v2, .faq-v2, .creator { padding: 70px 0; }
+  .step-panels {
+    grid-template-columns: 1fr;
+    gap: 70px;
+  }
   .plan-cols {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 50px;
   }
   .plan-cols::before {
     top: 50%;
@@ -475,10 +541,11 @@ footer.site a:hover { color: var(--ink); text-decoration: underline; }
     right: 12px;
     width: auto;
     height: 1px;
+    transform: translateY(-50%);
   }
-  .story-steps li {
-    grid-template-columns: 50px 1fr;
-    gap: 24px;
+  .creator-x {
+    font-size: 19px;
+    padding: 14px 26px;
   }
 }
 
