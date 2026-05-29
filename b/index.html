@@ -2,12 +2,19 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>[B版] ポケットToDo — 必須3つだけ追加</title>
+<title>ポケットToDo — 秒で放り込む、場面で出し分ける</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="秒で放り込む、場面で出し分ける、小タスク専用 ToDo。">
+<meta name="description" content="秒で放り込む、場面で出し分ける、小タスク専用 ToDo。通知も急かしもない、静かな iPhone アプリ。">
 <link rel="icon" type="image/png" href="../icon.png">
 <link rel="apple-touch-icon" href="../icon.png">
 <link rel="stylesheet" href="../styles.css">
+
+<meta property="og:title" content="ポケットToDo">
+<meta property="og:description" content="秒で放り込む、場面で出し分ける、小タスク専用 ToDo。">
+<meta property="og:image" content="../og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F6F5F2">
 </head>
 <body>
@@ -85,85 +92,90 @@
     </article>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section class="howto">
-    <p class="section-mark">—  HOW IT WORKS  —</p>
-    <h3 class="section-title">3 つの動作だけ。</h3>
-    <div class="steps">
-      <div class="step">
-        <p class="step-num">01</p>
-        <h4>放り込む</h4>
-        <p>＋ボタン → 1行入力 → 重さを1タップ。<br>3秒で終わる。</p>
-      </div>
-      <div class="step">
-        <p class="step-num">02</p>
-        <h4>場面を選ぶ</h4>
-        <p>移動中、寝る前。場面ごとに、<br>軽さで出し分く。</p>
-      </div>
-      <div class="step">
-        <p class="step-num">03</p>
-        <h4>片付ける</h4>
-        <p>軽い順に並ぶ。<br>完了はスワイプ1発で。</p>
-      </div>
-    </div>
+  <!-- HOW IT WORKS — 縦のナラティブ -->
+  <section class="howto-v2">
+    <p class="section-mark">—  how it works  —</p>
+    <h3 class="section-title-quiet">3つの動作だけ。</h3>
+
+    <ol class="story-steps">
+      <li>
+        <span class="step-n">一</span>
+        <div class="step-body">
+          <h4>放り込む</h4>
+          <p>＋ボタン、1行入力、重さを1タップ。3秒で終わる。</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-n">二</span>
+        <div class="step-body">
+          <h4>場面を選ぶ</h4>
+          <p>移動中。寝る前。場面ごとに、軽さで出し分く。</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-n">三</span>
+        <div class="step-body">
+          <h4>片付ける</h4>
+          <p>軽い順に並ぶ。完了はスワイプ一発で。</p>
+        </div>
+      </li>
+    </ol>
   </section>
 
-  <!-- FREE vs PRO -->
-  <section class="tiers">
-    <p class="section-mark">—  PLANS  —</p>
-    <h3 class="section-title">無料で始めて、必要になったら Pro。</h3>
-    <div class="tier-cards">
-      <div class="tier">
-        <div class="tier-head">
-          <h4>無料</h4>
-          <span class="tier-tag">ずっと無料</span>
-        </div>
+  <!-- PLANS — 2列の縦組み（書物見開き） -->
+  <section class="plans-v2">
+    <p class="section-mark">—  plans  —</p>
+    <h3 class="section-title-quiet">無料で始めて、必要になったら Pro。</h3>
+
+    <div class="plan-cols">
+      <div class="plan-col">
+        <p class="plan-name">無料</p>
+        <p class="plan-lead">ずっと無料で。</p>
         <ul>
           <li>タスクの放り込み・編集・完了</li>
           <li>4 場面の切り替え</li>
-          <li>場面ごとに出す重さのカスタマイズ</li>
+          <li>場面ごとに出す重さの調整</li>
           <li>直近 7 日の完了履歴</li>
-          <li>標準テーマ＋ダークテーマ</li>
+          <li>標準テーマ＋ダーク</li>
           <li>CSV による手動エクスポート</li>
         </ul>
       </div>
-      <div class="tier pro">
-        <div class="tier-head">
-          <h4>Pro</h4>
-          <span class="tier-tag">無料機能ぜんぶ＋</span>
-        </div>
+      <div class="plan-col">
+        <p class="plan-name">Pro</p>
+        <p class="plan-lead">無料機能ぜんぶに、</p>
         <ul>
-          <li>全期間の完了履歴（7日制限なし）</li>
-          <li>4 テーマ追加とオリジナル配色 3 つ</li>
+          <li>全期間の完了履歴</li>
+          <li>4 テーマ追加＋オリジナル配色 3 つ</li>
           <li>テーマに連動するアプリアイコン</li>
           <li>重さの呼び名と意味のカスタマイズ</li>
-          <li>iCloud 同期（順次提供予定）</li>
+          <li>iCloud 同期（順次提供）</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="faq">
-    <p class="section-mark">—  QUESTIONS  —</p>
-    <h3 class="section-title">よく聞かれること。</h3>
-    <div class="qa-list">
-      <details class="qa">
-        <summary>データはどこに保存されますか？</summary>
-        <p>すべて端末内に保存されます。サーバーには一切送られません。アカウント登録もログインも不要です。</p>
-      </details>
-      <details class="qa">
-        <summary>機種変したらデータは引き継がれますか？</summary>
-        <p>無料版では「手動エクスポート」（CSV）でデータを書き出し、新しい端末で取り込めます。Pro 版では iCloud 同期に順次対応します。</p>
-      </details>
-      <details class="qa">
-        <summary>通知は来ますか？</summary>
-        <p>来ません。急かさない設計のため、通知機能を意図的に持っていません。</p>
-      </details>
-      <details class="qa">
-        <summary>Pro をどうやって解約しますか？</summary>
-        <p>iPhone の「設定 → サブスクリプション → ポケットToDo」から解約できます。タスクデータは消えません。</p>
-      </details>
+  <!-- FAQ — accordionなし、全展開 -->
+  <section class="faq-v2">
+    <p class="section-mark">—  questions  —</p>
+    <h3 class="section-title-quiet">よく聞かれること。</h3>
+
+    <div class="qa-stack">
+      <div class="qa-item">
+        <h4 class="qa-q">データはどこに保存されますか？</h4>
+        <p class="qa-a">すべて端末内に。サーバーには送られません。アカウント登録もログインも不要です。</p>
+      </div>
+      <div class="qa-item">
+        <h4 class="qa-q">機種変したらデータは引き継がれますか？</h4>
+        <p class="qa-a">無料版では「手動エクスポート」(CSV) で書き出して取り込み。Pro 版では iCloud 同期に順次対応します。</p>
+      </div>
+      <div class="qa-item">
+        <h4 class="qa-q">通知は来ますか？</h4>
+        <p class="qa-a">来ません。急かさない設計のため、通知機能を意図的に持っていません。</p>
+      </div>
+      <div class="qa-item">
+        <h4 class="qa-q">Pro をどうやって解約しますか？</h4>
+        <p class="qa-a">iPhone の「設定 → サブスクリプション」から。解約してもタスクデータは消えません。</p>
+      </div>
     </div>
   </section>
 
