@@ -2,18 +2,24 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>ポケットToDo</title>
+<title>ポケットToDo — 秒で放り込む、場面で出し分ける、小タスク専用 ToDo</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="秒で放り込む、場面で出し分ける、小タスク専用ToDo。">
+<meta name="description" content="秒で放り込む、場面で出し分ける、小タスク専用 ToDo。通知も急かしもない、静かな iPhone アプリ。">
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="stylesheet" href="styles.css">
+
 <meta property="og:title" content="ポケットToDo">
-<meta property="og:description" content="秒で放り込む、場面で出し分ける、小タスク専用ToDo。">
-<meta property="og:image" content="icon.png">
+<meta property="og:description" content="秒で放り込む、場面で出し分ける、小タスク専用 ToDo。">
+<meta property="og:image" content="og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F6F5F2">
 </head>
 <body>
+
 <header class="nav"><div class="inner">
   <a class="brand" href="./"><img src="icon.png" alt="">ポケットToDo</a>
   <nav class="links">
@@ -23,34 +29,93 @@
   </nav>
 </div></header>
 
-<main class="wrap">
-  <section class="hero">
-    <img class="icon" src="icon.png" alt="ポケットToDo">
-    <h1>ポケットToDo</h1>
-    <p class="tagline">秒で放り込む、場面で出し分ける、<br>小タスク専用ToDo。</p>
-    <span class="pill">App Store 公開準備中</span>
-  </section>
+<main class="wrap-wide">
 
-  <section class="features">
-    <div class="feat">
-      <h3>2タップで放り込む</h3>
-      <p>「忘れる前に入れる」が3秒で終わる。重さは2×2で1タップ。</p>
+  <!-- HERO -->
+  <section class="hero-v2">
+    <div class="hero-text">
+      <p class="mark">—  pocket todo  —</p>
+      <h1>ポケットToDo</h1>
+      <p class="tagline">
+        秒で放り込む、場面で出し分ける、<br>
+        小タスク専用 ToDo。
+      </p>
+      <span class="pill">App Store 公開準備中</span>
     </div>
-    <div class="feat">
-      <h3>場面で出し分ける</h3>
-      <p>移動中・寝る前。同じ未完タスクでも、いま手をつけられる軽さだけ出る。</p>
-    </div>
-    <div class="feat">
-      <h3>軽い順に並ぶ</h3>
-      <p>緊急度ではなく、片付けやすさ順。小さい達成を積み上げる。</p>
-    </div>
-    <div class="feat">
-      <h3>静かなデザイン</h3>
-      <p>通知も急かしもない。きせかえは6色。気分で変えられる。</p>
+    <div class="hero-phone">
+      <div class="phone-frame">
+        <img src="web-screenshots/01-home-ido.jpg" alt="ポケットToDo ホーム画面">
+      </div>
     </div>
   </section>
 
-  <p class="fine" style="margin-top:48px;text-align:center">
+  <!-- SHOWCASE -->
+  <section class="showcase">
+
+    <article class="feat">
+      <div class="feat-phone"><div class="phone-frame">
+        <img src="web-screenshots/01-home-ido.jpg" alt="">
+      </div></div>
+      <div class="feat-text">
+        <p class="mark">—  01  —</p>
+        <h2>場面で出し分ける</h2>
+        <p>移動中、寝る前。場面ごとに、いま手をつけられる軽さのタスクだけが、軽い順に並びます。</p>
+      </div>
+    </article>
+
+    <article class="feat reverse">
+      <div class="feat-phone"><div class="phone-frame">
+        <img src="web-screenshots/02-add-open.jpg" alt="">
+      </div></div>
+      <div class="feat-text">
+        <p class="mark">—  02  —</p>
+        <h2>2タップで放り込む</h2>
+        <p>1行入力＋重さを1タップ。3秒で終わる、忘れる前に放り込む場所です。</p>
+      </div>
+    </article>
+
+    <article class="feat">
+      <div class="feat-phone"><div class="phone-frame">
+        <img src="web-screenshots/03-settings-themes.jpg" alt="">
+      </div></div>
+      <div class="feat-text">
+        <p class="mark">—  03  —</p>
+        <h2>6色のきせかえ</h2>
+        <p>気分に合わせて、アプリの色もホーム画面のアイコンも、ぜんぶ着替える。</p>
+      </div>
+    </article>
+
+    <article class="feat reverse">
+      <div class="feat-phone"><div class="phone-frame">
+        <img src="web-screenshots/04-history-full.jpg" alt="">
+      </div></div>
+      <div class="feat-text">
+        <p class="mark">—  04  —</p>
+        <h2>全部、ちゃんと残る</h2>
+        <p>7日より前に片付けたものも、ぜんぶ残っている。Pro なら全期間ふりかえれる。</p>
+      </div>
+    </article>
+
+    <article class="feat">
+      <div class="feat-phone"><div class="phone-frame">
+        <img src="web-screenshots/05-weight-rename.jpg" alt="">
+      </div></div>
+      <div class="feat-text">
+        <p class="mark">—  05  —</p>
+        <h2>自分の言葉で</h2>
+        <p>4つの重さを、呼び名も意味も自分の言葉に。並びと仕分けの仕組みはそのまま、見える言葉だけが自分仕様になる。</p>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy">
+    <blockquote>失わない、ぜんぶ残る、きせかえる。</blockquote>
+    <p class="fine philosophy-cap">通知なし。リマインドで急かさない設計。</p>
+  </section>
+
+  <p class="fine" style="margin-top:64px;text-align:center">
     開発・お問い合わせ <a href="https://x.com/bon_dev_" target="_blank" rel="noopener">@bon_dev_</a>
   </p>
 </main>

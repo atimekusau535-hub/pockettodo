@@ -142,13 +142,188 @@ footer.site a {
 }
 footer.site a:hover { color: var(--ink); text-decoration: underline; }
 
-/* ランディング専用 */
+/* ─────────────────────────────────────────
+   ランディング v2 — Pocket Quiet 哲学に準拠
+   ───────────────────────────────────────── */
+
+.wrap-wide {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 40px 30px 80px;
+}
+
+/* 書誌的な小印 */
+.mark {
+  font-size: 12.5px;
+  color: var(--ink3);
+  letter-spacing: 0.18em;
+  margin: 0 0 24px;
+  font-weight: 500;
+}
+
+/* HERO v2 */
+.hero-v2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  padding: 80px 0 100px;
+}
+.hero-text h1 {
+  font-size: 62px;
+  font-weight: 700;
+  margin: 0 0 28px;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
+}
+.hero-text .tagline {
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--ink2);
+  margin: 0 0 36px;
+}
+.hero-text .pill {
+  display: inline-block;
+  padding: 7px 16px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  color: var(--ink2);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+}
+.hero-phone {
+  display: flex;
+  justify-content: center;
+}
+
+/* デバイスフレーム共通 */
+.phone-frame {
+  background: var(--ink);
+  padding: 8px;
+  border-radius: 42px;
+  display: inline-block;
+  box-shadow:
+    0 30px 60px -10px rgba(0, 0, 0, 0.18),
+    0 12px 25px -5px rgba(0, 0, 0, 0.08);
+  max-width: 320px;
+}
+.phone-frame img {
+  display: block;
+  width: 100%;
+  border-radius: 34px;
+}
+
+/* SHOWCASE */
+.showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+  padding: 40px 0 100px;
+}
+.feat {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.feat.reverse {
+  direction: rtl;
+}
+.feat.reverse > * {
+  direction: ltr;
+}
+.feat-phone {
+  display: flex;
+  justify-content: center;
+}
+.feat-text h2 {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0 0 18px;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.feat-text p {
+  font-size: 16.5px;
+  line-height: 1.85;
+  color: var(--ink2);
+  margin: 0;
+  max-width: 460px;
+}
+
+/* PHILOSOPHY */
+.philosophy {
+  padding: 90px 0 70px;
+  text-align: center;
+  border-top: 1px solid var(--hairline);
+}
+.philosophy blockquote {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 18px;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+}
+.philosophy-cap {
+  margin: 0 !important;
+  color: var(--ink3);
+}
+
+/* ─── レスポンシブ ─── */
+
+@media (max-width: 880px) {
+  .wrap-wide {
+    padding: 30px 22px 60px;
+  }
+  .hero-v2,
+  .feat {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    padding: 50px 0;
+  }
+  .hero-v2 {
+    padding-top: 30px;
+  }
+  .feat.reverse {
+    direction: ltr;
+  }
+  .feat.reverse .feat-phone {
+    order: -1;
+  }
+  .hero-text h1 {
+    font-size: 44px;
+  }
+  .hero-text .tagline {
+    font-size: 17px;
+  }
+  .feat-text h2 {
+    font-size: 30px;
+  }
+  .showcase {
+    gap: 80px;
+    padding: 30px 0 70px;
+  }
+  .phone-frame {
+    max-width: 280px;
+  }
+  .philosophy blockquote {
+    font-size: 22px;
+  }
+}
+
+/* ─── 旧 .hero / .features クラスは互換のため残置（privacy/support 兼用） ─── */
+
 .hero {
   text-align: center;
   padding: 60px 0 40px;
 }
 .hero .icon {
-  width: 96px; height: 96px;
+  width: 96px;
+  height: 96px;
   border-radius: 22px;
   border: 1px solid var(--hairline);
   margin: 0 auto 24px;
@@ -173,20 +348,3 @@ footer.site a:hover { color: var(--ink); text-decoration: underline; }
   font-size: 12.5px;
   letter-spacing: 0.02em;
 }
-.features {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-  margin-top: 48px;
-}
-@media (min-width: 620px) {
-  .features { grid-template-columns: 1fr 1fr; }
-}
-.feat {
-  background: var(--surface);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-card);
-  padding: 20px 22px;
-}
-.feat h3 { margin: 0 0 4px; }
-.feat p { margin: 0; color: var(--ink2); font-size: 14px; }
