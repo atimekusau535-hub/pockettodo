@@ -202,13 +202,13 @@ h2 {
 }
 .cta-btn:hover { opacity: .9; transform: translateY(-1px); }
 .cta-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-.cta-sub { font-size: 12.5px; color: var(--ink3); letter-spacing: .04em; }
+.cta-sub { font-size: 12.5px; color: var(--ink2); letter-spacing: .04em; }
 .scrollhint {
-  margin-top: 52px; font-size: 13px; color: var(--ink3);
+  margin-top: 52px; font-size: 13px; color: var(--ink2);
   line-height: 2.2; letter-spacing: .1em;
   animation: floaty 4.5s ease-in-out infinite;
 }
-@keyframes floaty { 0%,100%{ transform: translateY(0); opacity:.6 } 50%{ transform: translateY(6px); opacity:1 } }
+@keyframes floaty { 0%,100%{ transform: translateY(0); opacity:.82 } 50%{ transform: translateY(6px); opacity:1 } }
 
 /* ============ 端末フレーム ============ */
 .phone {
@@ -347,7 +347,7 @@ h2 {
 #foot {
   position: relative; z-index: 1;
   display: flex; justify-content: center; gap: 22px;
-  padding: 40px 22px calc(48px + env(safe-area-inset-bottom)); font-size: 12.5px; color: var(--ink3);
+  padding: 40px 22px calc(48px + env(safe-area-inset-bottom)); font-size: 12.5px; color: var(--ink2);
 }
 #foot a { color: var(--ink2); text-decoration: none; }
 #foot a:hover { color: var(--ink); }
