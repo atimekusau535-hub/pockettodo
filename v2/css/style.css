@@ -1,0 +1,359 @@
+/* =========================================================
+   ポケットToDo — 窓辺の版面 / A Day, Set in Type
+   一日の時刻 (--t: 0=夜明け前 → 1=深夜) を背骨に、
+   色・余白・墨濃度がそれ一本で連続駆動する。
+   動くのは光と時間と読み手の呼吸。要素は静かに「定着」するだけ。
+   ========================================================= */
+
+:root {
+  /* JS(time.js)が --t に応じて毎フレーム更新する時刻パレット。
+     下は朝(昼)の既定値＝JS未実行でも成立する。 */
+  --paper:  #F6F5F2;   /* 地（紙） */
+  --ink:    #1C1B19;   /* 墨（本文・見出し） */
+  --ink2:   #6E6A63;
+  --ink3:   #9C978C;
+  --hair:   #E7E4DD;
+  --sky:    #F6F5F2;   /* 背後の空の色 */
+  --breath: 1;         /* 呼吸の明度係数 0.985〜1.015 */
+  --t: 0.15;
+
+  --serif: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);  /* 立ち上がりは緩く、終わりはさらに緩く（呼気） */
+  --dur-settle: 2.2s;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* スクリーンリーダ専用（見出し階層の補完） */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);      /* JS前のフォールバック地。#sky が前面に重なる */
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  line-height: 1.8;
+}
+
+/* 背後の空（時刻で色温度が移ろう） */
+#sky {
+  position: fixed; inset: 0; z-index: -3;
+  background: var(--sky);            /* color-mix 非対応でも成立する素の地 */
+  background:
+    radial-gradient(120% 90% at 70% 8%, color-mix(in oklab, var(--sky) 100%, #fff 4%), var(--sky) 60%),
+    var(--sky);
+  transition: background-color 0.6s linear;
+}
+/* 呼吸はWebGLが担う。WebGLが退場(.no-webgl)したときだけ #sky をCSSで微かに呼吸させる */
+.no-webgl #sky { animation: skybreath 16s ease-in-out infinite; }
+@keyframes skybreath { 0%,100%{ filter: brightness(1); } 50%{ filter: brightness(1.014); } }
+/* 呼吸するメッシュ（WebGL）。失敗時は透明のまま #sky のみで成立 */
+#breathe {
+  position: fixed; inset: 0; z-index: -2;
+  width: 100%; height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* 一日の時計（極細インジケータ：右上に小さな弧と点） */
+#daydial {
+  position: fixed; z-index: 50;
+  top: max(22px, env(safe-area-inset-top)); right: max(22px, env(safe-area-inset-right));
+  width: 30px; height: 30px;
+  border: 1px solid rgba(120,116,108,.45);
+  border: 1px solid color-mix(in oklab, var(--ink) 22%, transparent);
+  border-radius: 50%;
+  opacity: .5;
+}
+#daydial .sun {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--ink);
+  /* --t を角度に：朝(左下)→正午(上)→夜(右下) を半周で表現 */
+  top: 50%; left: 50%;
+  transform:
+    rotate(calc(-110deg + var(--t) * 220deg))
+    translateY(-15px);
+  transform-origin: 0 0;
+  margin: -2.5px;
+}
+
+/* ============ レイアウト ============ */
+
+main { position: relative; z-index: 1; }
+
+.scene {
+  min-height: 100vh;
+  min-height: 100svh;          /* 非対応ブラウザは直前の vh を採用 */
+  display: flex;
+  align-items: center;
+  padding: 12vh 0;
+  padding: 12svh 0;
+  position: relative;
+}
+.wrap {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+.wrap.center { text-align: center; }
+
+/* ============ 定着アニメ（薄墨 → 本墨） ============ */
+/* 余白譜の所作：opacity / letter-spacing / color の3つだけ動かす */
+
+[data-settle] {
+  opacity: .1;
+  color: var(--ink3);
+  letter-spacing: .42em;
+  transition:
+    opacity var(--dur-settle) var(--ease-settle),
+    letter-spacing var(--dur-settle) var(--ease-settle),
+    color var(--dur-settle) var(--ease-settle);
+  /* will-change は reveal.js が交差時のみ付与し、定着後に外す（貼りっぱなしのメモリ常時確保を避ける） */
+}
+[data-settle].is-settled {
+  opacity: 1;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+/* 強い定着（ヒーロー見出し）は字間をもう少し広→締め */
+[data-settle-strong] { letter-spacing: .6em; line-height: 1.35; }
+[data-settle-strong].is-settled { letter-spacing: -0.015em; }
+
+/* 本文・補助は薄墨の濃度を少し上げて読みやすく */
+.body[data-settle], .mark[data-settle] { opacity: .12; }
+.body[data-settle].is-settled { color: var(--ink2); }
+.lead[data-settle].is-settled { color: var(--ink2); }  /* 副題は ink2 で柔らかく */
+.mark[data-settle].is-settled { color: var(--ink2); }  /* 場面名＝情報なので ink2（可読性確保） */
+
+/* ============ 立ち上がり（タスク等が静かに現れる） ============ */
+[data-rise] {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(6px);
+  transition:
+    opacity 1.6s var(--ease-settle),
+    transform 1.6s var(--ease-settle),
+    filter 1.6s var(--ease-settle);
+  transition-delay: .25s;
+}
+[data-rise].is-settled {
+  opacity: 1; transform: none; filter: blur(0);
+}
+
+/* ============ タイポグラフィ ============ */
+
+.mincho { font-family: var(--serif); font-weight: 600; }
+
+.mark {
+  font-size: 12.5px; letter-spacing: .2em; color: var(--ink3);
+  margin-bottom: 26px; font-weight: 500;
+}
+
+h1 {
+  font-size: clamp(40px, 9vw, 76px);
+  font-weight: 700; line-height: 1.1;
+  margin-bottom: 26px;
+}
+h2 {
+  font-size: clamp(27px, 5.6vw, 44px);
+  font-weight: 700; line-height: 1.45;
+  letter-spacing: -0.01em;
+  margin-bottom: 26px;
+}
+.lead {
+  font-size: clamp(17px, 2.4vw, 21px);
+  line-height: 1.95; color: var(--ink2);
+}
+.body {
+  font-size: clamp(15px, 1.9vw, 16.5px);
+  line-height: 1.95; color: var(--ink2);
+  max-width: 30em;
+}
+.center-body { margin: 0 auto; }
+.fine { font-size: 12.5px; color: var(--ink3); letter-spacing: .08em; }
+
+/* ============ HERO ============ */
+.hero { min-height: 100vh; min-height: 100svh; }
+.hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.hero .lead { margin-bottom: 44px; }
+.scrollhint {
+  margin-top: 52px; font-size: 13px; color: var(--ink3);
+  line-height: 2.2; letter-spacing: .1em;
+  animation: floaty 4.5s ease-in-out infinite;
+}
+@keyframes floaty { 0%,100%{ transform: translateY(0); opacity:.6 } 50%{ transform: translateY(6px); opacity:1 } }
+
+/* ============ 端末フレーム ============ */
+.phone {
+  background: var(--ink);
+  padding: 8px; border-radius: 40px;
+  display: inline-block;
+  box-shadow: 0 40px 80px -20px rgba(28,27,25,.30), 0 16px 30px -10px rgba(28,27,25,.14);
+  box-shadow:
+    0 40px 80px -20px color-mix(in oklab, var(--ink) 30%, transparent),
+    0 16px 30px -10px color-mix(in oklab, var(--ink) 14%, transparent);
+}
+.phone img { display: block; width: 100%; max-width: 280px; border-radius: 32px; }
+
+.hero-phone { margin-top: 8px; }
+.hero-phone .phone img { max-width: 250px; }
+
+.float-phone { margin-top: 48px; display: flex; justify-content: center; }
+.float-phone.right { justify-content: flex-end; }
+.center-phone { justify-content: center; margin-top: 40px; }
+
+/* ============ 重さ（軽い順＝墨濃度差） ============ */
+.weights { list-style: none; margin-top: 40px; display: flex; flex-direction: column; gap: 2px; }
+.w {
+  display: grid; grid-template-columns: 34px auto 1fr; align-items: baseline; gap: 14px;
+  padding: 15px 4px;
+  border-bottom: 1px solid color-mix(in oklab, var(--hair) 100%, transparent);
+}
+.w:last-child { border-bottom: none; }
+.wi { font-size: 18px; opacity: calc(.45 + var(--ink-grade) * .55); }
+.wn {
+  font-size: 17px;
+  color: var(--ink2);   /* color-mix 非対応環境でも全項目くっきり読める */
+  color: color-mix(in oklab, var(--ink) calc(var(--ink-grade) * 100%), var(--ink3));
+}
+.wd { font-size: 12.5px; color: var(--ink3); text-align: right; }
+
+/* ============ 3つの所作 ============ */
+.steps { list-style: none; margin-top: 36px; display: flex; flex-direction: column; gap: 0; max-width: 540px; }
+.steps li { padding: 24px 0; border-bottom: 1px solid var(--hair); display: flex; flex-direction: column; gap: 8px; }
+.steps li:last-child { border-bottom: none; }
+.sn { font-size: 19px; color: var(--ink); }
+.sb { font-size: 14.5px; color: var(--ink2); line-height: 1.85; }
+
+/* ============ きせかえ（シグネチャー：6色一巡） ============ */
+.kisekae .wrap { padding-top: 4svh; padding-bottom: 4svh; max-width: 940px; }
+.big-cycle {
+  font-size: clamp(44px, 13.5vw, 118px);   /* 極小端末でも一行に収まる下限／デスクトップ上限 */
+  font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
+  margin: 8px 0 30px; white-space: nowrap;
+  color: var(--cycle-color, var(--ink));
+  transition: color 1.6s var(--ease-settle);
+}
+.center-body { font-size: 15.5px; }
+
+/* ============ プラン ============ */
+.plans {
+  margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px;
+  position: relative; max-width: 680px;
+}
+.plans::before {
+  content: ""; position: absolute; top: 8px; bottom: 8px; left: 50%; width: 1px;
+  background: var(--hair);
+}
+.plan { padding: 0 18px; }
+.pn { font-size: 19px; color: var(--ink); margin-bottom: 6px; }
+.pro .pn::after { content: " ◆"; font-size: 12px; color: var(--ink3); vertical-align: 3px; }
+.pl { font-size: 13px; color: var(--ink3); font-style: italic; margin-bottom: 22px; }
+.plan ul { list-style: none; }
+.plan li {
+  position: relative; padding: 11px 0 11px 20px; font-size: 14.5px; color: var(--ink);
+  line-height: 1.55; border-bottom: 1px solid var(--hair);
+}
+.plan li:last-child { border-bottom: none; }
+.plan li::before { content: "✓"; position: absolute; left: 0; top: 11px; color: var(--ink3); font-size: 13px; }
+
+/* ============ FAQ ============ */
+.qa { margin-top: 16px; max-width: 620px; }
+.q { padding: 24px 0; border-bottom: 1px solid var(--hair); }
+.q:last-child { border-bottom: none; }
+.qq { font-size: 17px; color: var(--ink); margin-bottom: 9px; }
+.qa-a { font-size: 14.5px; color: var(--ink2); line-height: 1.85; }
+
+/* ============ 夜：クライマックス ============ */
+.night { min-height: 130vh; min-height: 130svh; }
+.night-inner { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.night-mark { margin-bottom: 60px; transition: opacity 1.8s var(--ease-settle); }
+.night-mark.fade-away { opacity: 0; }   /* 反転の交差帯で読ませる文字を退かせる */
+
+.last-task {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 17px; color: var(--ink2);
+  margin-bottom: 70px;
+  transition: opacity 3s var(--ease-settle);
+}
+.last-task.fade-away { opacity: 0; }     /* 寝る前に一つだけ片付けて、あとは明日に置いていく */
+.lt-dot { font-size: 20px; }
+.lt-text { color: var(--ink); }
+
+.goodnight {
+  font-size: clamp(24px, 5.4vw, 40px);
+  line-height: 1.6; text-align: center; color: var(--ink);
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 2.6s var(--ease-settle) .4s, transform 2.6s var(--ease-settle) .4s;
+}
+.goodnight.is-settled { opacity: 1; transform: none; }
+
+.night-cta {
+  margin-top: 96px; display: flex; flex-direction: column; align-items: center; gap: 22px;
+  opacity: 0; transition: opacity 2.2s var(--ease-settle) 1s;
+}
+.night-cta.is-settled { opacity: 1; }
+.pill {
+  display: inline-block; padding: 7px 16px; border-radius: 999px;
+  border: 1px solid rgba(120,116,108,.4);
+  border: 1px solid color-mix(in oklab, var(--ink) 24%, transparent);
+  color: var(--ink2); font-size: 12.5px; letter-spacing: .04em;
+}
+.made { font-size: 15px; color: var(--ink2); }
+.x-link {
+  font-size: 21px; color: var(--ink); text-decoration: none; font-weight: 700;
+  padding: 14px 30px; border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  transition: background-color .25s, color .25s;
+}
+.x-link:hover { background: var(--ink); color: var(--paper); }
+
+/* フォーカス可視（キーボード操作） */
+.x-link:focus-visible, #foot a:focus-visible {
+  outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 999px;
+}
+
+/* ============ フッタ ============ */
+#foot {
+  position: relative; z-index: 1;
+  display: flex; justify-content: center; gap: 22px;
+  padding: 40px 22px calc(48px + env(safe-area-inset-bottom)); font-size: 12.5px; color: var(--ink3);
+}
+#foot a { color: var(--ink2); text-decoration: none; }
+#foot a:hover { color: var(--ink); }
+
+/* ============ レスポンシブ ============ */
+@media (max-width: 720px) {
+  .wrap { padding: 0 24px; }
+  .scene { padding: 10svh 0; }
+  .wd { display: none; }       /* モバイルは軸ラベル省略（重さ名だけ） */
+  .w { grid-template-columns: 30px 1fr; }
+  .plans { grid-template-columns: 1fr; gap: 40px; }
+  .plans::before { top: 50%; left: 12px; right: 12px; bottom: auto; width: auto; height: 1px; transform: translateY(-50%); }
+  .float-phone.right { justify-content: center; }
+  #daydial { top: 16px; right: 16px; width: 26px; height: 26px; }
+}
+
+/* ============ reduced-motion：定着しきった版面が最初から在る ============ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  /* reveal.js が is-settled を即付与するので色は通常の定着ルールに委ね、ここでは動きだけ殺す */
+  [data-settle], [data-rise], .goodnight, .night-cta, .last-task {
+    opacity: 1 !important; transform: none !important; filter: none !important;
+    transition: none !important;
+  }
+  [data-settle] { letter-spacing: -0.01em !important; }
+  [data-settle-strong] { letter-spacing: -0.015em !important; }
+  .scrollhint { animation: none; }
+  .big-cycle { transition: none; }
+}
