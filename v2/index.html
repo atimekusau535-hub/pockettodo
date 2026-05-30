@@ -2,9 +2,9 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>ポケットToDo — 一日の窓辺で、小さな用を片付ける</title>
+<title>ポケットToDo — 差し込む光のなかで、小さな用を片付ける</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="スクロールすると、一日が過ぎていく。窓の外が朝から夜へ移ろい、そのたびに「いまできる軽さ」だけがそっと差し出される。小タスク専用ToDo、ポケットToDo。">
+<meta name="description" content="スクロールすると、一日が過ぎていく。手元に差す光が朝から夜へ移ろい、そのたびに「いまできる軽さ」だけがそっと差し出される。小タスク専用ToDo、ポケットToDo。">
 <link rel="icon" type="image/png" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,12 +14,12 @@
 <link rel="stylesheet" href="css/style.css">
 <meta name="theme-color" content="#F6F5F2">
 <meta property="og:title" content="ポケットToDo">
-<meta property="og:description" content="一日の窓辺で、小さな用を片付ける。場面で出し分ける、静かなToDo。">
+<meta property="og:description" content="差し込む光のなかで、小さな用を片付ける。場面で出し分ける、静かなToDo。">
 <meta property="og:image" content="assets/icon.png">
 </head>
 <body>
 
-<!-- 窓の外：空・太陽/月・呼吸する背景・紙の質感 -->
+<!-- 一日の光：空・太陽/月・呼吸する背景・紙に差す光と影 -->
 <div id="sky" aria-hidden="true"></div>
 <canvas id="breathe" aria-hidden="true"></canvas>
 <div id="sun" aria-hidden="true"></div>
@@ -33,7 +33,7 @@
       <p class="mark settle" data-settle>—  pocket todo  ・  6:10  —</p>
       <h1 class="mincho settle" data-settle data-settle-strong>ポケットToDo</h1>
       <p class="lead settle" data-settle>
-        一日の窓辺で、<br>小さな用を片付ける。
+        差し込む光のなかで、<br>小さな用を片付ける。
       </p>
       <div class="hero-phone" data-rise>
         <div class="phone"><img src="assets/scene-ido.jpg" alt="ポケットToDo ホーム画面" loading="eager" fetchpriority="high" width="320" height="693"></div>
@@ -45,7 +45,7 @@
   <!-- ============ 01 朝：場面で出し分ける ============ -->
   <section class="scene" data-scene="morning">
     <div class="wrap">
-      <p class="mark settle" data-settle>—  朝  6:40  ・  morning  —</p>
+      <p class="mark settle" data-settle>—  朝  6:40  ・  first light  —</p>
       <h2 class="mincho settle" data-settle data-settle-strong>場面を選ぶと、<br>いまできる軽さだけ。</h2>
       <p class="body settle" data-settle>移動中、業務の合間、朝、寝る前。場面を選ぶと、その瞬間に手をつけられる重さのタスクだけが、軽い順に並びます。やることは、ただ上から片付けるだけ。</p>
       <ul class="weights" data-rise>
@@ -60,7 +60,7 @@
   <!-- ============ 02 3つの所作 ============ -->
   <section class="scene" data-scene="commute">
     <div class="wrap">
-      <p class="mark settle" data-settle>—  移動中  8:15  ・  on the go  —</p>
+      <p class="mark settle" data-settle>—  移動中  8:15  ・  morning light  —</p>
       <h2 class="mincho settle" data-settle data-settle-strong>一日のあいだ、<br>することは3つだけ。</h2>
       <ol class="steps" data-rise>
         <li><span class="sn mincho">放り込む</span><span class="sb">＋ボタン、1行入力、重さを1タップ。3秒で終わる。</span></li>
@@ -76,9 +76,9 @@
   <!-- ============ 03 業務の合間：出し分けの実演 ============ -->
   <section class="scene" data-scene="midday">
     <div class="wrap">
-      <p class="mark settle" data-settle>—  業務の合間  13:00  ・  between tasks  —</p>
+      <p class="mark settle" data-settle>—  業務の合間  13:00  ・  midday light  —</p>
       <h2 class="mincho settle" data-settle data-settle-strong>同じタスクでも、<br>場面が変われば出方が変わる。</h2>
-      <p class="body settle" data-settle>移動中なら少し頭を使うものまで。寝る前なら、考えなくていい「秒殺」だけ。通知は鳴らさない。急かさない。窓の外がただ移ろうように、その時間にやれることだけが、そっと差し出される。</p>
+      <p class="body settle" data-settle>移動中なら少し頭を使うものまで。寝る前なら、考えなくていい「秒殺」だけ。通知は鳴らさない。急かさない。手元の光がゆっくり傾いていくように、その時間にやれることだけが、そっと手元に置ける。</p>
       <div class="float-phone right" data-rise>
         <div class="phone"><img src="assets/scene-ido.jpg" alt="場面で出し分ける" loading="lazy" width="320" height="693"></div>
       </div>
@@ -88,7 +88,7 @@
   <!-- ============ 04 夕：きせかえ（シグネチャー1） ============ -->
   <section class="scene kisekae" data-scene="evening">
     <div class="wrap center">
-      <p class="mark settle" data-settle>—  夕暮れ  17:30  ・  themes  —</p>
+      <p class="mark settle" data-settle>—  夕暮れ  17:30  ・  golden hour  —</p>
       <h2 class="mincho big-cycle" id="kisekae" aria-label="きせかえる">きせかえる</h2>
       <p class="body settle center-body" data-settle>気分に合わせて、アプリの色も、ホーム画面のアイコンも、ぜんぶ着替える。6色のテーマと、自分で作るオリジナル配色。<br><span class="fine">— Pro</span></p>
       <div class="float-phone center-phone" data-rise>
@@ -100,7 +100,7 @@
   <!-- ============ 05 夕闇：全部残る ============ -->
   <section class="scene" data-scene="dusk">
     <div class="wrap">
-      <p class="mark settle" data-settle>—  日が落ちて  19:20  ・  history  —</p>
+      <p class="mark settle" data-settle>—  日が落ちて  19:20  ・  afterglow  —</p>
       <h2 class="mincho settle" data-settle data-settle-strong>片付けたものは、<br>ぜんぶ残っている。</h2>
       <p class="body settle" data-settle>7日より前に片付けたものも、Proなら全期間ふりかえれる。一日の終わりに、今日できたことが静かに積み上がっている。</p>
       <div class="float-phone" data-rise>
@@ -112,7 +112,7 @@
   <!-- ============ 06 宵：プラン ============ -->
   <section class="scene" data-scene="twilight">
     <div class="wrap">
-      <p class="mark settle" data-settle>—  宵  20:40  ・  plans  —</p>
+      <p class="mark settle" data-settle>—  宵  20:40  ・  lamplight  —</p>
       <h2 class="mincho settle" data-settle data-settle-strong>無料で始めて、<br>必要になったら Pro。</h2>
       <div class="plans" data-rise>
         <div class="plan">
@@ -157,12 +157,12 @@
   <section class="scene night" data-scene="night" id="night">
     <div class="wrap center night-inner">
       <h2 class="sr-only">寝る前に</h2>
-      <p class="mark night-mark settle" data-settle>—  寝る前  22:50  ・  before bed  —</p>
+      <p class="mark night-mark settle" data-settle>—  寝る前  22:50  ・  moonlight  —</p>
       <div class="last-task" id="lastTask" data-rise>
         <span class="lt-dot" aria-hidden="true">💭</span>
-        <span class="lt-text mincho">明日の窓で、続きを。</span>
+        <span class="lt-text mincho">明日の光で、続きを。</span>
       </div>
-      <p class="goodnight mincho" id="goodnight">おやすみ。<br>続きは、また明日の窓で。</p>
+      <p class="goodnight mincho" id="goodnight">今日の光は、ここまで。<br>続きは、また明日のポケットに。</p>
 
       <div class="night-cta" id="nightCta">
         <span class="pill">App Store 公開準備中</span>

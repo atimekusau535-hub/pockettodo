@@ -1,5 +1,5 @@
 /* =========================================================
-   ポケットToDo — 窓辺の版面 / A Day, Set in Type
+   ポケットToDo — 光の版面 / A Day in Light
    一日の時刻 (--t: 0=夜明け前 → 1=深夜) を背骨に、
    色・余白・墨濃度がそれ一本で連続駆動する。
    動くのは光と時間と読み手の呼吸。要素は静かに「定着」するだけ。
@@ -45,7 +45,7 @@ body {
 }
 
 /* 背後の空（時刻で色温度が移ろう） */
-/* 窓の外の空：上方に時刻で移ろう"地平線のグロー"を持つ */
+/* 一日の光：上方に時刻で移ろう地平線のグロー（光源）を持つ */
 #sky {
   position: fixed; inset: 0; z-index: -4;
   background: var(--sky);            /* color-mix 非対応でも成立する素の地 */
@@ -295,8 +295,9 @@ h2 {
 .lt-text { color: var(--ink); }
 
 .goodnight {
-  font-size: clamp(24px, 5.4vw, 40px);
-  line-height: 1.6; text-align: center; color: var(--ink);
+  font-size: clamp(20px, 4.8vw, 38px);   /* モバイルで「…ポケットに。」が一行に収まる上限 */
+  line-height: 1.75; text-align: center; color: var(--ink);
+  max-width: 18em;
   opacity: 0; transform: translateY(10px);
   transition: opacity 2.6s var(--ease-settle) .4s, transform 2.6s var(--ease-settle) .4s;
 }
