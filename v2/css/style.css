@@ -189,7 +189,20 @@ h2 {
 /* ============ HERO ============ */
 .hero { min-height: 100vh; min-height: 100svh; }
 .hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
-.hero .lead { margin-bottom: 44px; }
+.hero .lead { margin-bottom: 30px; }
+
+/* 主CTA（旅行系LPに倣い、明快な単一CTAをファーストビューに） */
+.hero-cta { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 8px; }
+.cta-btn {
+  display: inline-block; background: var(--ink); color: var(--paper);
+  font-size: 15.5px; font-weight: 600; letter-spacing: .02em;
+  padding: 15px 34px; border-radius: 999px; text-decoration: none;
+  transition: transform .2s var(--ease-settle), opacity .2s;
+  box-shadow: 0 10px 24px -10px rgba(28,27,25,.45);
+}
+.cta-btn:hover { opacity: .9; transform: translateY(-1px); }
+.cta-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.cta-sub { font-size: 12.5px; color: var(--ink3); letter-spacing: .04em; }
 .scrollhint {
   margin-top: 52px; font-size: 13px; color: var(--ink3);
   line-height: 2.2; letter-spacing: .1em;
@@ -304,10 +317,12 @@ h2 {
 .goodnight.is-settled { opacity: 1; transform: none; }
 
 .night-cta {
-  margin-top: 96px; display: flex; flex-direction: column; align-items: center; gap: 22px;
-  opacity: 0; transition: opacity 2.2s var(--ease-settle) 1s;
+  margin-top: 80px; display: flex; flex-direction: column; align-items: center; gap: 14px;
+  opacity: 0; transition: opacity 1.4s var(--ease-settle) .2s;
 }
 .night-cta.is-settled { opacity: 1; }
+.cta-lead { font-size: 19px; color: var(--ink); margin-bottom: 2px; }
+.made-by { margin-top: 8px; opacity: .8; }
 .pill {
   display: inline-block; padding: 7px 16px; border-radius: 999px;
   border: 1px solid rgba(120,116,108,.4);

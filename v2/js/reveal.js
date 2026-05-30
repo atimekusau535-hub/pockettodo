@@ -64,9 +64,9 @@
       if (fired) return; fired = true;
       // 反転の交差帯では読ませる文字を画面から退かせ、muddyな一瞬を無害化する
       if (nightMark) nightMark.classList.add('fade-away');
-      setTimeout(() => { if (lastTask) lastTask.classList.add('fade-away'); }, 700);
-      setTimeout(() => goodnight.classList.add('is-settled'), 1600);
-      if (nightCta) setTimeout(() => nightCta.classList.add('is-settled'), 2600);
+      setTimeout(() => { if (lastTask) lastTask.classList.add('fade-away'); }, 450);
+      setTimeout(() => goodnight.classList.add('is-settled'), 1100);
+      if (nightCta) setTimeout(() => nightCta.classList.add('is-settled'), 2000);
     };
     const nio = new IntersectionObserver((es) => {
       es.forEach((e) => {
