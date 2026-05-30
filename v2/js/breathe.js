@@ -62,9 +62,8 @@
       n = smoothstep(0.25, 0.95, n);
       // 中央ほど淡く、周縁にだけうっすら気配（ヴィネット反転）
       float vig = smoothstep(0.15, 1.1, distance(uv, vec2(0.5)));
-      float ink = n * u_alpha * (0.55 + vig * 0.6);
-      vec3 col = mix(u_paper/255.0, u_ink/255.0, ink);
-      gl_FragColor = vec4(col, 1.0);
+      float a = n * u_alpha * (0.55 + vig * 0.6);
+      gl_FragColor = vec4(u_ink/255.0, a);   // 墨をα合成（透明）。地と空のグローは #sky が担う
     }`;
 
   function sh(type, src) {
@@ -79,6 +78,9 @@
   gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
   if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { retire(); return; }
   gl.useProgram(prog);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  gl.clearColor(0, 0, 0, 0);
 
   // フルスクリーン三角形
   const buf = gl.createBuffer();
@@ -109,6 +111,7 @@
 
   function draw(timeSec) {
     const sky = window.__sky || { paper: [246,245,242], ink: [28,27,25] };
+    gl.clear(gl.COLOR_BUFFER_BIT);
     gl.uniform2f(U.res, canvas.width, canvas.height);
     gl.uniform1f(U.time, timeSec);
     gl.uniform3f(U.paper, sky.paper[0], sky.paper[1], sky.paper[2]);
