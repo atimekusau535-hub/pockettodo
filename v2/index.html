@@ -35,10 +35,18 @@
       <p class="lead settle" data-settle>
         移動中、寝る前。いま手をつけられる<br>軽さのタスクだけが、そっと出てくる。
       </p>
-      <div class="hero-cta" data-rise>
-        <a class="cta-btn" href="https://x.com/bon_dev_" target="_blank" rel="noopener">公開のお知らせを受け取る</a>
-        <p class="cta-sub">App Store 近日公開　・　無料で始められます</p>
-      </div>
+      <form class="hero-cta wl-form" id="waitlist" name="waitlist" method="POST"
+            action="https://pocket-todo.netlify.app/" data-netlify="true" netlify-honeypot="bot-field" data-rise>
+        <input type="hidden" name="form-name" value="waitlist">
+        <p class="bot-field"><label>このフィールドは記入しないでください<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <div class="wl-row">
+          <input type="email" name="email" placeholder="メールアドレス" required aria-label="メールアドレス">
+          <button type="submit" class="cta-btn">公開を知らせてもらう</button>
+        </div>
+        <p class="cta-sub">App Store 近日公開　・　無料　・　お知らせだけ、売り込みはしません</p>
+        <p class="cta-alt">メールの代わりに <a href="https://x.com/bon_dev_" target="_blank" rel="noopener">X（@bon_dev_）でも受け取れます</a></p>
+      </form>
+      <p class="wl-thanks" id="wlThanks" role="status" hidden>登録ありがとうございます。<br>公開したら、いちばんにお知らせします。</p>
       <div class="hero-phone" data-rise>
         <div class="phone"><img src="assets/scene-ido.jpg" alt="ポケットToDo ホーム画面" loading="eager" fetchpriority="high" width="320" height="693"></div>
       </div>
@@ -187,5 +195,6 @@
 <script src="js/breathe.js" defer></script>
 <script src="js/time.js" defer></script>
 <script src="js/reveal.js" defer></script>
+<script src="js/waitlist.js" defer></script>
 </body>
 </html>
