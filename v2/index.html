@@ -36,7 +36,8 @@
         移動中、寝る前。いま手をつけられる<br>軽さのタスクだけが、そっと出てくる。
       </p>
       <form class="hero-cta wl-form" id="waitlist" name="waitlist" method="POST"
-            action="https://pocket-todo.netlify.app/" data-netlify="true" netlify-honeypot="bot-field" data-rise>
+            action="https://pocket-todo.netlify.app/" data-netlify="true" netlify-honeypot="bot-field"
+            data-thanks="wlThanks" data-rise>
         <input type="hidden" name="form-name" value="waitlist">
         <p class="bot-field"><label>このフィールドは記入しないでください<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <div class="wl-row">
@@ -178,8 +179,20 @@
 
       <div class="night-cta" id="nightCta">
         <p class="cta-lead mincho">App Store、近日公開。</p>
-        <p class="made">公開したら、X でお知らせします。</p>
-        <a class="x-link mincho" href="https://x.com/bon_dev_" target="_blank" rel="noopener">公開を待つ　@bon_dev_</a>
+        <p class="made">公開したら、いちばんにお知らせします。</p>
+        <form class="wl-form" id="waitlistEnd" name="waitlist" method="POST"
+              action="https://pocket-todo.netlify.app/" data-netlify="true" netlify-honeypot="bot-field"
+              data-thanks="wlThanksEnd">
+          <input type="hidden" name="form-name" value="waitlist">
+          <p class="bot-field"><label>このフィールドは記入しないでください<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <div class="wl-row">
+            <input type="email" name="email" placeholder="メールアドレス" required aria-label="メールアドレス">
+            <button type="submit" class="cta-btn">公開を知らせてもらう</button>
+          </div>
+          <p class="cta-sub">無料　・　お知らせだけ、売り込みはしません</p>
+        </form>
+        <p class="wl-thanks" id="wlThanksEnd" role="status" hidden>登録ありがとうございます。<br>公開したら、いちばんにお知らせします。</p>
+        <p class="cta-alt">メールの代わりに <a href="https://x.com/bon_dev_" target="_blank" rel="noopener">X（@bon_dev_）でも受け取れます</a></p>
         <p class="fine made-by">ひとりで作っています。</p>
       </div>
     </div>
