@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="ポケットToDo">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="ポケットToDo — 小タスク専用のToDoアプリ">
-<meta property="og:description" content="移動中、寝る前。いま手をつけられる軽さのタスクだけが、そっと出てくる。通知で急かさない、静かなiOSのToDo。近日公開・事前登録受付中。">
+<meta property="og:description" content="移動中、寝る前。いま手をつけられる軽さのタスクだけが、そっと出てくる。通知で急かさない、静かなiOSのToDo。App Store で公開中・無料。">
 <meta property="og:image" content="https://pocket-todo.netlify.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -26,7 +26,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@bon_dev_">
 <meta name="twitter:title" content="ポケットToDo — 小タスク専用のToDoアプリ">
-<meta name="twitter:description" content="移動中、寝る前。いま手をつけられる軽さのタスクだけが、そっと出てくる。近日公開・事前登録受付中。">
+<meta name="twitter:description" content="移動中、寝る前。いま手をつけられる軽さのタスクだけが、そっと出てくる。App Store で公開中・無料。">
 <meta name="twitter:image" content="https://pocket-todo.netlify.app/og.png">
 </head>
 <body>
@@ -47,19 +47,11 @@
       <p class="lead settle" data-settle>
         移動中、寝る前。いま手をつけられる<br>軽さのタスクだけが、そっと出てくる。
       </p>
-      <form class="hero-cta wl-form" id="waitlist" name="waitlist" method="POST"
-            action="https://pocket-todo.netlify.app/" data-netlify="true" netlify-honeypot="bot-field"
-            data-thanks="wlThanks" data-rise>
-        <input type="hidden" name="form-name" value="waitlist">
-        <p class="bot-field"><label>このフィールドは記入しないでください<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-        <div class="wl-row">
-          <input type="email" name="email" placeholder="メールアドレス" required aria-label="メールアドレス">
-          <button type="submit" class="cta-btn">公開を知らせてもらう</button>
-        </div>
-        <p class="cta-sub">App Store 近日公開　・　無料　・　お知らせだけ、売り込みはしません</p>
-        <p class="cta-alt">メールの代わりに <a href="https://x.com/bon_dev_" target="_blank" rel="noopener">X（@bon_dev_）でも受け取れます</a></p>
-      </form>
-      <p class="wl-thanks" id="wlThanks" role="status" hidden>登録ありがとうございます。<br>公開したら、いちばんにお知らせします。</p>
+      <div class="hero-cta" data-rise>
+        <a class="cta-btn" href="https://apps.apple.com/jp/app/id6776480131" target="_blank" rel="noopener">App Store で入手</a>
+        <p class="cta-sub">無料　・　iPhone 対応　・　アカウント登録なし</p>
+        <p class="cta-alt">つくっている人は <a href="https://x.com/bon_dev_" target="_blank" rel="noopener">X（@bon_dev_）</a></p>
+      </div>
       <div class="hero-phone" data-rise>
         <div class="phone"><img src="assets/scene-ido.jpg" alt="ポケットToDo ホーム画面" loading="eager" fetchpriority="high" width="320" height="693"></div>
       </div>
@@ -157,7 +149,6 @@
             <li>4テーマ追加＋オリジナル配色3つ</li>
             <li>テーマ連動アイコン</li>
             <li>重さの呼び名と意味のカスタマイズ</li>
-            <li>iCloud同期（順次提供）</li>
           </ul>
         </div>
       </div>
@@ -170,9 +161,9 @@
       <h2 class="sr-only">よくある質問</h2>
       <p class="mark settle" data-settle>—  questions  —</p>
       <div class="qa" data-rise>
-        <div class="q"><p class="qq mincho">データはどこに？</p><p class="qa-a">すべて端末内に。サーバーには送られません。アカウントもログインも不要です。</p></div>
+        <div class="q"><p class="qq mincho">データはどこに？</p><p class="qa-a">タスクは端末内に。開発者のサーバーには送りません（購入の検証のみ Apple／RevenueCat を利用）。アカウントもログインも不要です。</p></div>
         <div class="q"><p class="qq mincho">通知は来る？</p><p class="qa-a">来ません。急かさない設計のため、通知機能を意図的に持っていません。</p></div>
-        <div class="q"><p class="qq mincho">機種変したら？</p><p class="qa-a">無料版はCSVで書き出して取り込み。Pro版はiCloud同期に順次対応します。</p></div>
+        <div class="q"><p class="qq mincho">機種変したら？</p><p class="qa-a">データは端末内に保存されます。今のところ、端末をまたぐ自動引き継ぎはありません（CSVで書き出して記録を残すことはできます）。</p></div>
         <div class="q"><p class="qq mincho">Proの解約は？</p><p class="qa-a">iPhoneの設定 → サブスクリプションから。解約してもデータは消えません。</p></div>
       </div>
     </div>
@@ -190,21 +181,10 @@
       <p class="goodnight mincho" id="goodnight">今日の光は、ここまで。<br>続きは、また明日のポケットに。</p>
 
       <div class="night-cta" id="nightCta">
-        <p class="cta-lead mincho">App Store、近日公開。</p>
-        <p class="made">公開したら、いちばんにお知らせします。</p>
-        <form class="wl-form" id="waitlistEnd" name="waitlist" method="POST"
-              action="https://pocket-todo.netlify.app/" data-netlify="true" netlify-honeypot="bot-field"
-              data-thanks="wlThanksEnd">
-          <input type="hidden" name="form-name" value="waitlist">
-          <p class="bot-field"><label>このフィールドは記入しないでください<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-          <div class="wl-row">
-            <input type="email" name="email" placeholder="メールアドレス" required aria-label="メールアドレス">
-            <button type="submit" class="cta-btn">公開を知らせてもらう</button>
-          </div>
-          <p class="cta-sub">無料　・　お知らせだけ、売り込みはしません</p>
-        </form>
-        <p class="wl-thanks" id="wlThanksEnd" role="status" hidden>登録ありがとうございます。<br>公開したら、いちばんにお知らせします。</p>
-        <p class="cta-alt">メールの代わりに <a href="https://x.com/bon_dev_" target="_blank" rel="noopener">X（@bon_dev_）でも受け取れます</a></p>
+        <p class="cta-lead mincho">App Store で、公開中。</p>
+        <a class="cta-btn" href="https://apps.apple.com/jp/app/id6776480131" target="_blank" rel="noopener">App Store で入手</a>
+        <p class="cta-sub">無料　・　iPhone 対応　・　アカウント登録なし</p>
+        <p class="cta-alt">つくっている人は <a href="https://x.com/bon_dev_" target="_blank" rel="noopener">X（@bon_dev_）</a></p>
         <p class="fine made-by">ひとりで作っています。</p>
       </div>
     </div>
@@ -220,7 +200,6 @@
 <script src="js/breathe.js" defer></script>
 <script src="js/time.js" defer></script>
 <script src="js/reveal.js" defer></script>
-<script src="js/waitlist.js" defer></script>
 <!-- Cloudflare Web Analytics（pocket-todo.netlify.app と同じトークン＝引っ越しても計測継続） -->
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b58835a4bdcc40d989df7d2155df9a05"}'></script>
 </body>
