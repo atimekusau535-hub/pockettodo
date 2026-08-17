@@ -1,0 +1,10 @@
+# pocket-todo.netlify.app の配信設定
+#
+# 注意：このリポジトリのルート直下は「秒で放り込む」版LP（GitHub Pages 用）。
+# Netlify で配信したいのは v2/（明朝体・光の移ろい版）なので、publish を v2 に固定する。
+# これを外すとルートの別デザインが配信されてしまう。
+#
+# ビルド不要の静的サイトのため command は無し。
+
+[build]
+  publish = "v2"
